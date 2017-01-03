@@ -13,6 +13,7 @@ var update = function () {
       if (alarm.hours === time.get('hour') && (alarm.minutes === time.get('minutes'))){
         alert('yay, alarm done');
         alarms.splice(index,1);
+        $('#myModal').modal('show'); 
       }
     });
 };
