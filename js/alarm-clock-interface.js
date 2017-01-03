@@ -1,21 +1,37 @@
-var datetime = null,
-        date = null;
+var AlarmClock =require('./../js/alarm-clock.js').alarmclockModules;
+
+var analogTime = null,
+        date = null,
+        time = null;
 
 var update = function () {
-    date = moment(new Date())
-    datetime.html(date.format('dddd, MMMM Do YYYY, h:mm:ss a'));
+    time = moment(new Date());
+    date.html(time.format('dddd, MMMM Do YYYY'));
+    analogTime.html(time.format( 'h:mm:ss a'));
 };
 
 $(document).ready(function(){
-    datetime = $('#time')
+    analogTime = $('#analogTime');
+    date = $('#date');
     update();
     setInterval(update, 1000);
+    $("#setAlarm").submit(function(event){
+      event.preventDefault();
+      var hours = parseInt($('#hours').val());
+      var minutes = parseInt($('#minutes').val());
+      var ampm = $('#ampm option:selected').val();
+      var alarm = new AlarmClock (hours, minutes, ampm);
+      console.log(alarm);
+    });
 
-  // $('#time').text(moment("123", "hmm").format("HH:mm"));
-  // $('#time').text(moment('2012 July','YYYY MMM', 'en'));
-  // moment().get('date');
-  // moment().set('month', 3);  // April
-  // moment().add(7, 'days').subtract(1, 'months').year(2009).hours(0).minutes(0).seconds(0);
+});
+
+
+// $('#time').text(moment("123", "hmm").format("HH:mm"));
+// $('#time').text(moment('2012 July','YYYY MMM', 'en'));
+// moment().get('date');
+// moment().set('month', 3);  // April
+// moment().add(7, 'days').subtract(1, 'months').year(2009).hours(0).minutes(0).seconds(0);
 // moment().add({days:7,months:1}); // with object literal
 
 // var a = moment([2007, 0, 28]);
@@ -32,6 +48,3 @@ $(document).ready(function(){
 // var timer = moment.duration(5, "seconds").timer({loop: true}, function() {
 //   // Callback
 // });
-
-
-});

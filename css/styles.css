@@ -1,0 +1,23 @@
+@font-face { font-family: ds_digital; src: url('DS-DIGI.TTF'); }
+body{
+  background-color: black;
+  font-family: 'Orbitron', sans-serif;
+}
+.centerer{
+  position: absolute;
+top: 50%;
+left:50%;
+transform: translate(-50%,-50%);
+}
+
+#analogTime{
+  font-family: ds_digital !important;
+  font-size: 10vw;
+  color: rgb(59, 207, 193);
+}
+
+#date{
+  color: rgb(121, 219, 202);
+  font-size: 2vw;
+  text-align: center;
+}
