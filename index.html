@@ -15,17 +15,26 @@
 Copy
 <div id="myModal" class="modal fade" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
-    <div class="modal-content">
+    <div id ="test"class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">Modal title</h4>
       </div>
       <div class="modal-body">
-        <p>One fine body&hellip;</p>
+        <img src="img/giphy.gif" alt="alarm">
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <div class="row">
+        <div class="form-group"  id="snooze">
+          <form id="snoozeForm">
+            <div class="form-group col-xs-8">
+            <input class="form-control" type="number" id="timeTosnooze" min="1" max="60" placeholder="Snooze for how many minutes?">
+            </div>
+            <div class="col-xs-4">
+            <button type="submit" id="setSnooze" class="btn btn-danger">Snooze</button>
+          </div>
+          </form>
+        </div>
+      </div>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
@@ -36,7 +45,7 @@ Copy
       <div id='alarm-clock'>
         <button class='btn btn-primary' id="addAlarm" type="button" name="button">Add an alarm!</button>
       </div>
-      <div class="form-group well">
+      <div id="alarmForm" class="form-group well hidden">
       <form class="" id="setAlarm" action="index.html" method="post">
         <h6>Set the alarm</h6>
         <div class="row">

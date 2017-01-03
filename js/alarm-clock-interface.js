@@ -3,6 +3,7 @@ var AlarmClock =require('./../js/alarm-clock.js').alarmclockModules;
 var analogTime = null,
         date = null,
         time = null,
+        audioElement= null,
         alarms = [];
 
 var update = function () {
@@ -11,13 +12,20 @@ var update = function () {
     analogTime.html(time.format( 'h:mm:ss a'));
     alarms.forEach(function(alarm,index) {
       if (alarm.hours === time.get('hour') && (alarm.minutes === time.get('minutes'))){
-        alert('yay, alarm done');
         alarms.splice(index,1);
-        $('#myModal').modal('show'); 
+        $('#myModal').modal('show');
+        playSound();
       }
     });
 };
-
+function playSound(){
+  audioElement;
+  if(!audioElement) {
+    audioElement = document.createElement('audio');
+    audioElement.innerHTML = '<source src="' + 'alarm.mp3'+ '" type="audio/mpeg" />'
+  }
+  audioElement.play();
+}
 $(document).ready(function(){
     analogTime = $('#analogTime');
     date = $('#date');
@@ -28,10 +36,25 @@ $(document).ready(function(){
       var hours = parseInt($('#hours').val());
       var minutes = parseInt($('#minutes').val());
       var ampm = $('#ampm option:selected').val();
-      var alarm = new AlarmClock (hours, minutes, ampm);
+      (ampm === "AM") ? hours = hours : hours = hours + 12;
+      var alarm = new AlarmClock (hours, minutes);
       alarms.push(alarm);
     });
-
+    $("#addAlarm").click(function() {
+      $("#alarmForm").toggleClass("hidden");
+    });
+    $("#snoozeForm").submit(function(event){
+      event.preventDefault();
+      var snooze = parseInt($('#timeTosnooze').val());
+      var minutes = (time.get('minutes') + snooze) % 60;
+      var hours = null;
+      (time.get('minutes') + snooze) >= 60 ? hours = time.get('hours') + 1 : hours = time.get('hours');
+      var alarmSnooze = new AlarmClock( hours, minutes);
+      alarms.push(alarmSnooze);
+      $('#myModal').modal('hide');
+      audioElement.pause()
+      console.log(alarms)
+    });
 });
 
 

@@ -1,6 +1,5 @@
-function AlarmClock (hours, minutes, ampm) {
+function AlarmClock (hours, minutes) {
   this.hours = hours;
   this.minutes = minutes;
-  this.ampm = ampm;
 }
 exports.alarmclockModules= AlarmClock;
