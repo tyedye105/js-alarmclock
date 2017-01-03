@@ -2,12 +2,19 @@ var AlarmClock =require('./../js/alarm-clock.js').alarmclockModules;
 
 var analogTime = null,
         date = null,
-        time = null;
+        time = null,
+        alarms = [];
 
 var update = function () {
     time = moment(new Date());
     date.html(time.format('dddd, MMMM Do YYYY'));
     analogTime.html(time.format( 'h:mm:ss a'));
+    alarms.forEach(function(alarm,index) {
+      if (alarm.hours === time.get('hour') && (alarm.minutes === time.get('minutes'))){
+        alert('yay, alarm done');
+        alarms.splice(index,1);
+      }
+    });
 };
 
 $(document).ready(function(){
@@ -21,7 +28,7 @@ $(document).ready(function(){
       var minutes = parseInt($('#minutes').val());
       var ampm = $('#ampm option:selected').val();
       var alarm = new AlarmClock (hours, minutes, ampm);
-      console.log(alarm);
+      alarms.push(alarm);
     });
 
 });
